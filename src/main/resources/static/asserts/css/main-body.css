@@ -1,0 +1,156 @@
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+p{
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+a{
+    /*cursor: pointer;*/
+}
+#top{
+    width: 48px;
+    height: 48px;
+    background: url("../img/toTop.png") no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    position: fixed;
+    right: 10px;
+    bottom: 30px;
+    display: none;
+}
+.bt-body{
+    width: 100%;
+    height: auto !important;
+    min-height: 5400px;
+    max-height: 99999px;
+    background-color: rgba(173,253,205,0.1);
+    position: relative;
+    margin: 0 auto;
+}
+.main-body{
+    width: 1000px;
+    height: 1058px;
+    position: relative;
+    padding-top: 50px;
+    padding-bottom: 40px;
+    margin: 0 auto;
+}
+.main-body .bt-module{
+    width: 1000px;
+    height: 1058px;
+}
+
+/*分类标题*/
+.main-body .bt-module .module-tit{
+    text-align: center;
+}
+.main-body .bt-module .module-tit h2{
+    display: block;
+    color: #89d5ca;
+    font-size: 28px;
+    line-height: 28px;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+.main-body .bt-module .module-tit h2 a{
+    position: relative;
+    color: #89d5ca;
+    font-size: 28px;
+    line-height: 28px;
+    letter-spacing: 1px;
+    font-weight: 700;
+
+}
+.main-body .bt-module .module-tit p{
+    font-size: 18px;
+    color: #666666;
+    margin-top: 16px;
+    position: relative;
+}
+.main-body .bt-module .module-tit p span:first-child{
+    margin-right: 20px;
+}
+.main-body .bt-module .module-tit p span:last-child{
+    margin-left: 20px;
+}
+
+/*素材列表*/
+.main-body .bt-module .bt-list {
+    margin-top: 25px;
+    width: 1000px;
+    height: 870px;
+    /*background-color: orange;*/
+}
+.bt-list li{
+    width: 235px;
+    height:400px;
+    float: left;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.15);
+    margin-left: 12px;
+}
+.bt-list li  #box{
+    width: 235px;
+    height: 354px;
+    margin-top: 63px;
+    margin-left: 35px;
+    position: relative;
+    border: 1px solid #000;
+
+}
+/**/
+.bt-list li #box #small_box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.bt-list li .bg-img{
+    width: 235px;
+    height: 354px;
+}
+.bt-list li .book-img{
+    width: 165px;
+    height: 250px;
+    margin-top: 63px;
+    margin-left: 35px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.bt-list li p{
+    margin: 0 auto;
+    margin-left: 10px;
+    width: 100%;
+    height: 20px;
+}
+.bt-list li p span{
+    font-weight: bold;
+}
+
+/*查看更多*/
+.main-body .bt-module .looked-more{
+    height: 23px;
+    text-align: center;
+}
+.main-body .bt-module .looked-more a,
+.main-body .bt-module .looked-more p{
+    position: relative;
+    color: #666666;
+    font-size: 18px;
+    line-height: 18px;
+    opacity: 0.6;
+    padding-top: 5px;
+    letter-spacing: 1px;
+}

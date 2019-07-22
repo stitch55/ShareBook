@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>页面公共的导航栏</title>
+    <link rel="stylesheet" th:href="@{/asserts/css/exit.css}">
+    <!--<link rel="stylesheet" href="ShareBook-header.css" th:href="@{/asserts/css/ShareBook-header.css}">-->
+</head>
+<body>
+
+<div class="header-box" th:fragment="TOP" >
+    <div class="banner-background"></div>
+    <div class="new-banner">
+        <div id="header" class="nologin-index" >
+            <div class="wrapper wrapper-996">
+                <div class="menu-bar">
+                    <div class="left-part">
+                        <ul class="nav">
+                            <li><img src="image/logo.png" alt="" th:src="@{/asserts/img/logo.png}"></li>
+                            <li><a href="/" data_title="home" class="header-item">首页</a></li>
+                            <li><a href="/" th:href="@{/community}" class="header-item" style=" color: #acd5cd;
+            font-weight: bold;">社区</a></li>
+                                <ul class="sub">
+                                    <li>小说</li>
+                                    <li>文艺</li>
+                                    <li>历史文化</li>
+                                    <li>经济/管理</li>
+                                    <li>心理/励志</li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--登陆模块-->
+                    <div th:fragment="Login" class="right-part">
+                        <div class="top">
+
+                            <!--<div class="img" th:if="${session.user!=null}"><img src="image/login.png"  th:src="@{/asserts/img/login.png}" class="img_login">-->
+
+                            </div>
+                            <!--//用户登录时的显示-->
+                            <div class="img" th:if="${session.user!=null}">
+                                <!--<img src="image/login.png" th:src="@{/asserts/img/login.png}" class="img_login">-->
+                                <img th:src="@{${session.user.photoUrl}}" alt="" class="img_login" id="img_login" style="width: 30px;height: 30px;position: absolute;left: 50%;bottom: 20px;cursor: pointer">
+                                <!--注销和退出下拉框-->
+                                <div class="exit" style="height: 121px;">
+                                    <div class="info">
+                                        <!--个人中心的入口-->
+                                        <a th:href="@{/personMsg(id=${session.user.id})}">
+                                            <!--<img src="image/头像.jpg" th:src="@{${session.user.photoUrl}}" alt="" style="width: 30px;height: 30px;border-radius: 50%;position: relative;right: 0;top: 0;" >-->
+                                            <p style="position: relative;left: 8px;top:27px ;font-family: '幼圆';font-size: 20px;letter-spacing: 8px;">[[${session.user.nickname}]]</p>
+                                        </a>
+
+                                    </div>
+                                    <ul id ="exit_ul">
+                                        <li>
+                                            <img src="image/退出登录.png" th:src="@{asserts/img/退出登录.png}"/>
+                                            <a  th:href="@{/SignOut(id=${session.user.id})}" style="letter-spacing: 10px">退出</a>
+                                        </li>
+                                        <!--<li>-->
+                                            <!--&lt;!&ndash;<img src="image/注销.png" th:src="@{asserts/img/注销.png}"/>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<a  style="letter-spacing: 10px" th:href="@{/delete(id=${session.user.id})}"> 注销</a>&ndash;&gt;-->
+                                        <!--</li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                        <div class="btn1" id="btn_login"><p id="login_in" th:if="${session.user==null}" style="display: none" >登录</p></div>
+                        <!--<div class="btn1" id="btn_login"><p  th:if="${session.user!=null}" th:text="${session.user.nickname}" style="width:150px;position: fixed"></p><p id="login_in" th:if="${session.user==null}" style="display: none" >登录</p></div>-->
+
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

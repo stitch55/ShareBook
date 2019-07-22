@@ -1,0 +1,157 @@
+*{
+    margin:0;
+    padding:0;
+    list-style:none;
+    text-decoration: none;
+    font-family: "helvetica neue",arial,sans-serif;
+    font-size: 14px;
+    color: #444444;
+    /*overflow-x: hidden;*/
+    outline: none;
+}
+/*登录蒙版*/
+#panel{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+}
+#login,#reg{
+    width: 500px;
+    height: 360px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    position: fixed;
+    left: 35%;
+    top: 30%;
+    display: none;
+}
+#login .close-pop,#reg .close-pop{
+    height: 21px;
+    width: 22px;
+    background: url("/asserts/img/close.png");
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    display: block;
+}
+#login .login-share-logo,#reg .login-share-logo{
+    width: 120px;
+    height: 120px;
+    background: url("/asserts/img/logo.png");
+    background-size: 120px 120px;
+    margin: 0 auto;
+}
+#login .login-new-line{
+    width: 100%;
+    height: 60px;
+}
+#reg .login-new-line{
+    width: 100%;
+    height: 30px;
+}
+#login .login-new-line span,#reg .login-new-line span{
+    display: inline-block;
+    margin: 0 auto;
+    margin-left: 35px;
+    color: #999999;
+}
+#login .login-new-line p,#reg .login-new-line p{
+    display: inline-block;
+    font-size: 12px;
+    color: #999999;
+    text-align: center;
+    line-height: 60px;
+    margin: 0 auto;
+    margin-left: 20px;
+}
+#login .login-in-way,#reg .login-in-way{
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    margin-top:20px;
+}
+#login .login-in-way a,#reg .login-in-way a{
+    width: 64px;
+    height: auto;
+    display: inline-block;
+    vertical-align: top;
+}
+#login .login-in-way a:nth-of-type(2),#reg .login-in-way a:nth-of-type(2){
+    margin: 0 78px;
+}
+#login .login-in-way a p,#reg .login-in-way a p{
+    display: block;
+    width: 64px;
+    height: 64px;
+    border: 1px solid #E7E7E7;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: #fff;
+}
+#login .login-in-way a p:hover,#reg .login-in-way a p:hover{
+    border-color: yellowgreen;
+}
+#login .login-in-way a p i,#reg .login-in-way a p i{
+    display: inline-block;
+    margin: 6px auto;
+}
+#login .login-in-way a span,#reg .login-in-way a span{
+    display: block;
+    width: 100%;
+    font-size: 14px;
+    color: #838383;
+    letter-spacing: 1px;
+    margin-top: 16px;
+    text-align: center;
+}
+#login .protocol-link,#reg .protocol-link{
+    font-size: 12px;
+    color: #CCCCCC;
+    display: block;
+    text-align: center;
+    margin-top: 44px;
+}
+#reg .protocol-link{
+    margin-top: 15px;
+    text-align: right;
+    margin-right: 10px;
+    color: #666666;
+}
+#login .protocol-link a,#reg .protocol-link a{
+    color: #CCCCCC;
+    font-size: 12px;
+}
+#login .protocol-link a:hover{
+    color: yellowgreen;
+}
+#reg .protocol-link a{
+    color: yellowgreen;
+    opacity: 0.8;
+}
+#reg .protocol-link a:hover{
+    opacity: 1;
+    font-weight: bold;
+    text-decoration: underline;
+}
+#reg .phone{
+    width: 100%;
+    height: 30px;
+    margin-top: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+#reg .phone p{
+    color: yellowgreen;
+    opacity: 0.8;
+    cursor: pointer;
+}
+#reg .phone p:hover{
+    opacity: 1;
+    font-weight: bold;
+    text-decoration: underline;
+}

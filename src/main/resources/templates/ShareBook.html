@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ShareBook</title>
+
+    <link rel="stylesheet" href="ShareBook-header.css" th:href="@{/asserts/css/ShareBook-header.css}">
+    <link rel="stylesheet" href="main-body.css" th:href="@{/asserts/css/main-body.css}">
+    <link rel="stylesheet" href="exit.css" th:href="@{/asserts/css/exit.css}">
+    <script src="jquery-3.3.1.js" th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+
+    <script th:src="@{/asserts/js/userRegister.js}"></script>
+    <script src="ShareBook.js" th:src="@{/asserts/js/ShareBook.js}"></script>
+    <script src="myFunc.js" th:src="@{/asserts/js/myFunc.js}"></script>
+    <script src="exit.js" th:src="@{/asserts/js/exit.js}"></script>
+
+
+</head>
+<body>
+<!--返回顶部-->
+<span id="top"></span>
+<!--导航条-->
+<div class="header-box" th:fragment="TOP" >
+    <div class="banner-background"></div>
+    <div class="new-banner">
+        <div class="title">享书，择书如同择友</div>
+        <div class="search-box">
+            <form action="" class="new-searching-unit" method="get">
+                <input type="text" id="query" size="27" placeholder="书籍名称 / 作者">
+                <a  id = "searchBook" class="go"></a>
+            </form>
+
+        </div>
+        <div id="header" class="nologin-index" >
+            <div class="wrapper wrapper-996">
+                <div class="menu-bar">
+                    <div class="left-part">
+                        <ul class="nav">
+                            <li><img src="image/logo.png" alt="" th:src="@{/asserts/img/logo.png}"></li>
+                            <li><a href="/" data_title="home" class="header-item active" id="first">首页</a></li>
+                            <li><a href="/" th:href="@{/community}" class="header-item" id="community">社区</a></li>
+                            <li class="type"><a href="/" class="header-item">分类</a>
+                                <ul class="sub">
+                                    <li onclick="javascript:document.getElementById('first_1').scrollIntoView()">小说</li>
+                                    <li onclick="javascript:document.getElementById('second_2').scrollIntoView()">科技教育</li>
+                                    <li onclick="javascript:document.getElementById('third_3').scrollIntoView()">文艺</li>
+                                    <li onclick="javascript:document.getElementById('forth_4').scrollIntoView()">历史文化</li>
+                                    <li onclick="javascript:document.getElementById('fifth_5').scrollIntoView()">经济管理</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="right-part">
+                        <div class="top">
+
+                            <div class="img" th:if="${session.user==null}"><img src="image/login.png"  th:src="@{/asserts/img/login.png}" class="img_login">
+
+                            </div>
+                            <!--//用户登录时的显示-->
+                            <div class="img" th:if="${session.user!=null}">
+                                <!--<img src="image/login.png" th:src="@{/asserts/img/login.png}" class="img_login">-->
+                                <img src="image/头像.jpg" th:src="@{${session.user.photoUrl}}" alt="" class="img_login" id="img_login" style="width: 30px;height: 30px;position: absolute;left: 50%;bottom: 20px;cursor: pointer">
+                                <!--注销和退出下拉框-->
+                                <div class="exit" style="height: 121px;">
+                                    <div class="info">
+                                        <!--个人中心的入口-->
+                                        <a th:href="@{/personMsg(id=${session.user.id})}">
+                                            <img src="image/头像.jpg" th:src="@{${session.user.photoUrl}}" alt="" style="width: 30px;height: 30px;border-radius: 50%;position: absolute;right: 40%;top: 4%;" >
+                                            <p style="position: absolute;left: 36%;top: 20%;font-family: '幼圆';font-size: 16px;letter-spacing: 8px;">[[${session.user.nickname}]]</p>
+                                        </a>
+
+                                    </div>
+                                    <ul id ="exit_ul">
+                                        <li>
+                                            <img src="image/退出登录.png" th:src="@{asserts/img/退出登录.png}"/>
+                                            <a  th:href="@{/SignOut(id=${session.user.id})}" style="letter-spacing: 10px">退出</a>
+                                        </li>
+                                        <!--<li>-->
+                                            <!--&lt;!&ndash;<img src="image/注销.png" th:src="@{asserts/img/注销.png}"/>&ndash;&gt;-->
+                                            <!--&lt;!&ndash;<a  style="letter-spacing: 10px" th:href="@{/delete(id=${session.user.id})}"> 注销</a>&ndash;&gt;-->
+                                        <!--</li>-->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="btn1" id="btn_login"><p  th:if="${session.user!=null}" th:text="${session.user.nickname}"></p><p id="login_in" th:if="${session.user==null}" >登录</p></div>
+                        </div>
+                        <!--<p  th:if="${user!=null}" th:text="${user.nickname}"></p><p id="login_in" th:if="${user==null}" >登录</p>-->
+                        <div class="bottom">
+                            <div class="img"><img src="image/rigster.png" th:src="@{/asserts/img/rigster.png}" class="img_rigster"></div>
+                            <div class="btn2" id="btn_rigster"><p id="rigster" >注册</p></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--主题内容-->
+<div class="bt-body">
+    <div class="main-body">
+        <!--小说类-->
+        <div class="bt-module" id="first_1">
+            <!--分类标题-->
+            <div class="module-tit">
+                <h2><a href="" target="_blank" >小 说</a></h2>
+                <p>
+                    <span>—————</span>
+                    NOVEL
+                    <span>—————</span>
+                </p>
+            </div>
+            <!--素材列表-->
+            <div class="bt-list" >
+                <ul class="clearfix" >
+                    <li class="sc-home-ad" th:each="b:${type1}" >
+                        <a href="" th:href="@{/getMsgs(id=${b.id})}" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <!--书本的外边框-->
+                                <img class="bg-img" src="image/bg.jpg"th:src="@{/asserts/img/bg.jpg}"/>
+                                <!--书本的封面-->
+                                <img class="book-img" src="image/timg.jpg" th:src="@{${b.coverUrl}}" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>[[${b.book_name}]]</p>
+                            <p><span>· 作 者:</span> &nbsp;[[${b.author}]]</p>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!--查看更多-->
+            <div class="looked-more">
+                <a href="" th:href="@{/getMoreBook(type=1,page=1)}" th:if="${typeLen1>8}" target="_blank">
+                    点击查看更多
+                    <span>···></span>
+                </a>
+                <p th:if="${typeLen1<8}" th:text="本类书本数量有限" ></p>
+            </div>
+        </div>
+        <!--科技教育类-->
+        <div class="bt-module" id="second_2">
+            <!--分类标题-->
+            <div class="module-tit" >
+                <h2><a href="" target="_blank" >科技教育</a></h2>
+                <p>
+                    <span>—————</span>
+                    SCIENCE&TECHNOLOGY EDUCATION
+                    <span>—————</span>
+                </p>
+            </div>
+            <!--素材列表-->
+            <div class="bt-list">
+                <ul class="clearfix" th:each="b:${type2}"  >
+                    <li class="sc-home-ad">
+                        <a href="" th:href="@{/getMsgs(id=${b.id})}" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <img class="bg-img" src="image/bg.jpg"th:src="@{/asserts/img/bg.jpg}" alt="">
+                                <img class="book-img" src="" th:src="@{${b.coverUrl}}" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>[[${b.book_name}]]</p>
+                            <p><span>· 作 者:</span> &nbsp;[[${b.author}]]</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--查看更多-->
+            <div class="looked-more">
+                <a href="" th:href="@{/getMoreBook(type=2,page=1)}"  th:if="${typeLen2>8}" target="_blank">
+                    点击查看更多
+                    <span>···></span>
+
+                </a>
+                <p th:if="${typeLen2<=8}" th:text="本类书本数量有限" ></p>
+            </div>
+        </div>
+        <!--文艺类-->
+        <div class="bt-module" >
+            <!--分类标题-->
+            <div class="module-tit" id="third_3">
+                <h2><a href="" target="_blank" >文 艺</a></h2>
+                <p>
+                    <span>—————</span>
+                    LITERATURE
+                    <span>—————</span>
+                </p>
+            </div>
+            <!--素材列表-->
+            <div class="bt-list">
+                <ul class="clearfix" th:each="b:${type3}"  >
+                    <li class="sc-home-ad">
+                        <a href="" th:href="@{/getMsgs(id=${b.id})}" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <img class="bg-img" src="image/bg.jpg"th:src="@{/asserts/img/bg.jpg}" alt="">
+                                <img class="book-img" src="" th:src="@{${b.coverUrl}}" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>[[${b.book_name}]]</p>
+                            <p><span>· 作 者:</span> &nbsp;[[${b.author}]]</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--查看更多-->
+            <div class="looked-more">
+                <a href="" th:href="@{/getMoreBook(type=3,page=1)}"  th:if="${typeLen3>8}" target="_blank">
+                    点击查看更多
+                    <span>···></span>
+
+                </a>
+                <p th:if="${typeLen3<8}" th:text="本类书本数量有限" ></p>
+            </div>
+        </div>
+        <!--历史文化类-->
+        <div class="bt-module" id="forth_4">
+            <!--分类标题-->
+            <div class="module-tit">
+                <h2><a href="" target="_blank" >历史文化</a></h2>
+                <p>
+                    <span>—————</span>
+                    HISTORY AND CULTURE
+                    <span>—————</span>
+                </p>
+            </div>
+            <!--素材列表-->
+            <div class="bt-list">
+                <ul class="clearfix" th:each="b:${type4}" >
+                    <li class="sc-home-ad">
+                        <a href="" th:href="@{/getMsgs(id=${b.id})}" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <img class="bg-img" src="image/bg.jpg"th:src="@{/asserts/img/bg.jpg}" alt="">
+                                <img class="book-img" src="" th:src="@{${b.coverUrl}}" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>[[${b.book_name}]]</p>
+                            <p><span>· 作 者:</span> &nbsp;[[${b.author}]]</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--查看更多-->
+            <div class="looked-more">
+                <a href="" th:href="@{/getMoreBook(type=4,page=1)}" th:if="${typeLen4>8}" target="_blank">
+                    点击查看更多
+                    <span>···></span>
+                </a>
+                <p th:if="${typeLen4<8}" th:text="本类书本数量有限" ></p>
+            </div>
+        </div>
+        <!--经济管理类-->
+        <div class="bt-module" id="fifth_5">
+            <!--分类标题-->
+            <div class="module-tit" >
+                <h2><a href="" target="_blank" >经济/管理</a></h2>
+                <p>
+                    <span>—————</span>
+                    HCONOMIC MANAGEMENT
+                    <span>—————</span>
+                </p>
+            </div>
+            <!--素材列表-->
+            <div class="bt-list">
+                <ul class="clearfix" th:each="b:${type5}"  >
+                    <li class="sc-home-ad">
+                        <a href="" th:href="@{/getMsgs(id=${b.id})}" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <img class="bg-img" src="image/bg.jpg"th:src="@{/asserts/img/bg.jpg}" alt="">
+                                <img class="book-img" src="" th:src="@{${b.coverUrl}}" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>[[${b.book_name}]]</p>
+                            <p><span>· 作 者:</span> &nbsp;[[${b.author}]]</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--查看更多-->
+            <div class="looked-more">
+                <a href="" th:href="@{/getMoreBook(type=5,page=1)}" th:if="${typeLen5>8}" target="_blank">
+                    点击查看更多
+                    <span>···></span>
+                </a>
+                <p th:if="${typeLen5<8}" th:text="本类书本数量有限" ></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--登录蒙版-->
+<div id="panel"></div>
+<div id="login">
+    <!--关闭-->
+    <a href="" class="close-pop"></a>
+    <!--logo-->
+    <div class="login-share-logo"></div>
+    <div class="login-new-line">
+        <span>——————————</span>
+        <p>3秒登录 即可下载</p>
+        <span>——————————</span>
+    </div>
+    <div class="login-in-way clearfix">
+        <a th:href="@{/login(id=9)}" class="in-way-WX">
+            <p id="wx_p">
+                <i class="iconfont icon-weixin">
+                    <img src="image/微信.png" th:src="@{/asserts/img/微信.png}"/>
+                </i>
+            </p>
+            <span>微信登录</span>
+        </a>
+        <a th:href="@{/login(id=5)}"  onclick="Login(id)" class="in-way-QQ">
+            <p>
+                <i class="iconfont icon-qq">
+                    <img src="image/qq.png" th:src="@{/asserts/img/qq.png}"/>
+                </i>
+            </p>
+            <span>QQ登录</span>
+        </a>
+        <a th:href="@{/login(id=7)}" onclick="Login(id)" class="in-way-SJ">
+            <p>
+                <i class="iconfont icon-shouji">
+                    <img src="image/手机.png" th:src="@{/asserts/img/手机.png}"/>
+                </i>
+            </p>
+            <span>手机登录</span>
+        </a>
+    </div>
+    <div class="protocol-link">
+        注册即同意 <a href="" target="_blank">《享书网络服务使用协议》</a>
+        &
+        <a href="" target="_blank">《享书隐私政策》</a>
+    </div>
+</div>
+<div id="reg">
+    <!--关闭-->
+    <a href="" class="close-pop"></a>
+    <!--logo-->
+    <div class="login-share-logo"></div>
+    <div class="login-new-line">
+        <span>——————————</span>
+        <p>用第三方账号注册享书</p>
+        <span>——————————</span>
+    </div>
+    <div class="login-in-way clearfix">
+        <a id="1"  onclick="Register(id)" class="in-way-WX">
+            <p>
+                <i class="iconfont icon-weixin">
+                    <img src="image/微信.png" th:src="@{/asserts/img/微信.png}"/>
+                </i>
+            </p>
+            <span>微信注册</span>
+        </a>
+        <a id="2" href="" onclick="Register(id)" class="in-way-QQ">
+            <p>
+                <i class="iconfont icon-qq">
+                    <img src="image/qq.png" th:src="@{/asserts/img/qq.png}"/>
+                </i>
+            </p>
+            <span>QQ注册</span>
+        </a>
+        <a id="3" href="" onclick="Register(id)" class="in-way-WB">
+            <p>
+                <i class="iconfont icon-wb">
+                    <img src="image/微博.png" th:src="@{/asserts/img/微博.png}"/></i>
+            </p>
+            <span>微博注册</span>
+        </a>
+    </div>
+    <div class="phone">
+        <p>使用手机号注册</p>
+    </div>
+    <div class="protocol-link">
+        <!--跳转到登录的页面-->
+        已有账号？<a href="" target="_blank">登录到享书</a>
+    </div>
+</div>
+
+</body>
+</html>

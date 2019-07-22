@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <mata name="save" content="history"></mata>
+    <title>享书-个人中心</title>
+    <script language="javascript" type="text/javascript">
+        function Focus(flag,id){
+            // alert(flag,id);
+            var fdata ={
+                "userId":jQuery("#user_id").text(),
+                "focusId":id,
+                "flag":1
+            }
+            // alert(flag);
+            // alert(id);
+            if(flag=="取消关注"){
+                jQuery("#Focus_Fans").load("/Focus",{
+                    "userId":jQuery("#user_id").text(),
+                    "focusId":id,
+                    "flag":1
+               })
+                // jQuery('#focus1').css('display','block')
+                //使用ajax 完成局部刷新
+                // jQuery.ajax({
+                //     url:"/Focus",
+                //     type:"POST",
+                //     data:fdata,
+                //     success:function (rsp) {
+                //
+                //             jQuery("#Focus_Fans").html(rsp);
+                //     }
+                // })
+                //关注-1
+                var focusCount =parseInt(jQuery("#guanzhu").text()) -parseInt(1);
+                jQuery("#guanzhu").html(focusCount);
+
+            }else {
+                jQuery("#Focus_Fans").load("/Focus",{
+                    "userId":jQuery("#user_id").text(),
+                    "focusId":id,
+                    "flag":0
+                })
+                //关注+1
+                var fanCount = parseInt(jQuery("#fensi").text())+parseInt(1);
+                jQuery("#guanzhu").html(fanCount);
+            }
+
+        }
+        //删除书本
+       function Delectbook(id){
+           event.stopPropagation();
+           //直接传递typeId sourceId
+           var typeId = jQuery("#"+id+"typeId").text();
+           var sourceId = jQuery("#"+id+"sourceId").text();
+           //获取cover 这个元素
+
+           var msg = "您真的确定要删除吗？\n\n请确认！";
+           if(confirm(msg)==true)
+           {
+              jQuery("#book").load("/debook",{
+                  "bookId":id,
+                  "userId":jQuery("#user_id").text(),
+                  "typeId":typeId,
+                  "sourceId":sourceId
+              })
+
+           }
+           //将cover这个div 添加到id="Page"  之后
+           //<div class="page" id="cover" ></div>
+           var cover = jQuery('<div></div>').attr('class','page').attr('id','cover');
+           jQuery('#book').after(cover);
+
+       }
+       //修改书籍信息
+        function ModifyBook(id){
+            // alert(id);
+            var myMask4=jQuery('#mask4');
+            var myAlert4 =jQuery("#upld1");
+            myMask4.css('display','block');
+            myAlert4.css('display','block');
+            myAlert4.css('position','absolute');
+            myAlert4.css('top','30%');
+            myAlert4.css('left','50%');
+            myAlert4.css('marginTop','-75px');
+            myAlert4.css('marginLeft','-150px');
+            jQuery(document).snowfall('clear');
+            if(window.event){
+                event.cancelBubble  = true;//IE下阻止冒泡
+            }else{
+                event.stopPropagation();
+            }
+            //收集数据,填充数据
+            var book_id = jQuery("#"+id+"bookId").text();
+            var book_name = jQuery("#"+id+"name").text();
+            var book_author = jQuery("#"+id+"author").text();
+            var cover = jQuery("#"+id+"cover").attr('src');
+            var wangpan = jQuery("#"+id+"wangpan").text();
+            var xianxia = jQuery("#"+id+"xianxia").text();
+            var type1 = jQuery("#"+id+"type1").text();
+            var type2 = jQuery("#"+id+"type2").text();
+            var type3 = jQuery("#"+id+"type3").text();
+            var type4 = jQuery("#"+id+"type4").text();
+            var type5 = jQuery("#"+id+"type5").text();
+            var text = jQuery("#"+id+"text").text();
+            // alert("类别："+type1+type2+type3+type4+type5);
+           //数据填充
+            jQuery("#img2").attr('src',cover);
+            if(type1==1){
+                jQuery("#check6").attr('checked','checked');
+            }else {
+                jQuery("#check6").removeAttr("checked");
+            }
+            if(type2==1){
+                jQuery("#check7").attr('checked','checked');
+            }else {
+                jQuery("#check7").removeAttr("checked");
+            }
+            if(type3==1){
+                jQuery("#check8").attr('checked','checked');
+            }else {
+                jQuery("#check8").removeAttr("checked");
+            }
+            if(type4==1){
+                jQuery("#check9").attr('checked','checked');
+            }else {
+                jQuery("#check9").removeAttr("checked");
+            }
+           if(type5==1){
+               jQuery("#check10").attr('checked','checked');
+           }else {
+               jQuery("#check10").removeAttr("checked");
+           }
+            jQuery("#upname2").val(book_name);
+            jQuery("#upauthor2").val(book_author);
+            jQuery("#wangpanurl2").val(wangpan);
+            jQuery("#wayconnect2").val(xianxia);
+            jQuery("#suibi2").val(text);
+            jQuery("#BookId").html(book_id);
+        }
+
+        //修改书本的状态
+        function Status(bookid) {
+            //显示修改的框
+            var myAlert5 = jQuery('#alert5');
+            var myMask5=jQuery('#mask5');
+            myMask5.css("display",'block');
+            myAlert5.css('display','block');
+            myAlert5.css('position','absolute');
+            myAlert5.css('top','20%');
+            myAlert5.css('left','50%');
+            myAlert5.css('marginTop','-75px');
+            myAlert5.css('marginLeft','-150px');
+            jQuery('body').css('overflow','hidden');
+            jQuery(document).snowfall('clear');
+            if(window.event){
+                event.cancelBubble  = true;//IE下阻止冒泡
+            }else{
+                event.stopPropagation();
+            }
+            //将书本的id 写进去
+            jQuery("#Status_book_id").html(bookid);
+
+        }
+
+    </script>
+
+    <script src="jquery-3.3.1.min.js" th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <link rel="stylesheet" href="personal-center.css" th:href="@{/asserts/css/personal-center.css}">
+    <script type="text/javascript" src="personal-center.js" th:src="@{/asserts/js/personal-center.js}"></script>
+    <script src="https://cdn.bootcss.com/JQuery-Snowfall/1.7.4/snowfall.jquery.min.js" th:src="@{https://cdn.bootcss.com/JQuery-Snowfall/1.7.4/snowfall.jquery.min.js}"></script>
+</head>
+<body >
+    <div class="notice-box" style="display: none">
+        <div>
+            <img src="img/提醒.svg" th:src="@{/asserts/img/提醒.svg}">
+            <span class="notice-msg"></span>
+        </div>
+    </div>
+    <div id="header">
+        <!--左上角艺术字-->
+        <div class="title">
+            <img src="img/nav.png" th:src="@{/asserts/img/nav.png}" alt="/">
+        </div>
+        <!--右上角回首页-->
+        <div class="goback"><a href="/ShareBook.html" th:href="@{/}" >首页</a></div>
+    </div>
+    <!--tab选项卡-->
+    <div id="nav" style="z-index:100">
+        <ul class="tab" id="tab" >
+            <li class="select" ><img class="tab_img" src="img/个人资料.svg" th:src="@{/asserts/img/个人资料.svg}">个人资料</li>
+            <li ><img class="tab_img" src="img/分享.svg" th:src="@{/asserts/img/分享.svg}">我的分享</li>
+            <li id ="click_focus"><img class="tab_img" src="img/关注.svg" th:src="@{/asserts/img/关注.svg}">我的关注</li>
+            <li id="click_fans"><img class="tab_img" src="img/粉丝.svg" th:src="@{/asserts/img/粉丝.svg}">我的粉丝</li>
+        </ul>
+    </div>
+    <!--tab选项卡所对应的内容-->
+
+    <div id="content" style="z-index:100">
+        <div id="fl">
+            <div class="mod" style="display:block" th:fragment="PersonMsg">
+                <div class="tab-name">个人资料</div><hr class="hl1">
+                <div class="user-info" >
+                    <div class="user-pic">
+                        <img id="user-pic" src="img/user-pic.jpg" th:src="@{${p.photoUrl}}">
+                        <p class="modify" id="modify">修改头像</p>
+                        <!--个人信息的存放数据-->
+                        <p id="user_id" style="display: none" th:text="${p.id}"></p>
+                        <p id="user_number" style="display: none" th:text="${p.number}"></p>
+                        <p id="user_photo" style="display: none" th:text="${p.photoUrl}"></p>
+                        <!--取消关系和添加关注的相关信息-->
+
+
+                    </div>
+                    <div class="user-msg">
+                        <p class="Id">ID:&nbsp;&nbsp;<span id="Id" th:text="${p.number}"></span></p>
+                        <p class="id-low">
+                            关注:&nbsp;<span id="guanzhu" th:text="${p.focusCount}">2</span>&nbsp;&nbsp;<!--从后台获取该用户的关注数，仅显示-->
+                            粉丝:&nbsp;<span id="fensi" th:text="${p.fansCount}">0</span><!--从后台获取该用户的粉丝数量，仅显示-->
+                        </p>
+                        <p><hr></p>
+                        <!--从后台获取该用户的昵称，仅显示-->
+                        <p class="user-name">
+                            <label style="letter-spacing: 8px">昵称：&nbsp;</label><span id="user-name" th:text="${p.nickname}">sfcdvdfvd</span>
+                            <span id="modifymsg">修改资料</span>
+                        </p>
+                        <p><label style="letter-spacing: 8px">密码：&nbsp;</label><span id="pwd" th:text="${p.password}">123456789</span></p>
+                        <p class="user-content"><label style="letter-spacing: 8px">感悟：&nbsp;</label><span id="user-content" th:text="${p.inspiration}">No pains，No gains！</span></p>
+                        <p><label>拥有书籍的数量：&nbsp;</label><sapn id="ownbook-num" th:text="${p.own_count}">5</sapn></p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mod" style="display:none" id="trans1">
+           <!--<img src="../static/asserts/img/tuzi.jpg" height="200" width="300"/>-->
+            <img th:src="@{/asserts/img/tuzi.jpg}" id="tuzi">
+            <div class="tab-name"><a id="share_books">我的分享</a></div><hr class="hl1">
+            <div class="uploadbook" id="uploadbook"><img id="upload" src="img/上传书籍.svg" alt="上传书籍" th:src="@{/asserts/img/上传书籍.svg}">上传书籍</div>
+
+            <div id="book" >
+                <!--注意div从上到下的顺序对应着书页从后到前翻页,因为先写的先进行排放-->
+
+                    <div class="page" id="Page" th:each="b:${books}" th:fragment="Books">
+
+                        <div class="book-top">
+                            <div class="top-left">
+                                <img src="img/book1.jpg" th:id="${b.id}+cover" th:src="@{${b.coverUrl}}" style="border:1px dashed gray;">
+                                <span id="book-label"></span>
+                            </div>
+                            <div class="top-right">
+
+                                <div class="title" style="margin-top:15px;">书名：<span th:id="${b.id}+name" th:text="${b.book_name}"></span></div>
+                                <div class="title" style="margin-top:15px;">作者：<span th:id="${b.id}+author" th:text="${b.author}"></span></div>
+                                <div class="title" style="margin-top:15px;">网盘分享：<span th:id="${b.id}+wangpan" th:text="${b.bookSource.wangpan}"></span></div>
+
+                                <div class="title" style="margin-top:15px;">线下联系：<span th:id="${b.id}+xianxia" th:text="${b.bookSource.xianxia}"></span></div>
+                                <div class="title" style="margin-top:15px;">借阅状态：<span th:text="${b.status==1}?'可以借阅':'暂时不借阅'"></span></div>
+
+                                <span th:id="${b.id}+bookId" th:text="${b.id}" style="display: none"></span>
+                                <p th:id="${b.id}+type1" th:text="${b.type.type1}" style="display: none"></p>
+                                <p th:id="${b.id}+type2" th:text="${b.type.type2}" style="display: none"></p>
+                                <p th:id="${b.id}+type3" th:text="${b.type.type3}" style="display: none"></p>
+                                <p th:id="${b.id}+type4" th:text="${b.type.type4}" style="display: none"></p>
+                                <p th:id="${b.id}+type5" th:text="${b.type.type5}" style="display: none"></p>
+                                <p th:id ="${b.id}+status" th:text="${b.status}" style="display: none"></p>
+                                <p th:id="${b.id}+zan" th:text="${b.zanCount}" style="display: none"></p>
+                                <p th:id ="${b.id}+typeId"  th:text="${b.type.id}" style="display: none"></p>
+                                <p th:id="${b.id}+sourceId" th:text="${b.bookSource.id}" style="display: none"></p>
+
+                            </div>
+                        </div>
+                        <div class="book-bottom">
+                            <div class="title">——简介——</div>
+                            <div class="content" th:id="${b.id}+text" th:text="${b.text}"></div>
+
+                            <div th:id="${b.id}" onclick="ModifyBook(this.id)">
+                             <div class="modify-btn" id="modify-btn">修改信息</div>
+                            </div>
+
+                            <div onclick="Delectbook(this.id)" class="delete-btn"th:id="${b.id}">删除书籍</div>
+                            <div class="con-btn" th:id="${b.id}" onclick="Status(this.id)">修改书籍状态</div>
+
+                        </div>
+                    </div>
+
+            </div>
+            <div class="page" id="cover" ></div>
+        </div>
+        <div id="Focus_Fans" style="display:none" >
+            <div th:fragment="Focus_Fans">
+                <div class="mod" id="focus1">
+                    <div class="tab-name">我的关注</div>
+                    <div class="user-focus" id="Focus"  style="overflow: hidden" th:fragment="Focus">
+                        <div class="focus"  th:each="f:${focus}" >
+                            <!--这里放关注的用户的头像，仅显示-->
+                            <img src="img/focus-img.jpg" alt="focus-img" id="focus-img" th:src="@{${f.photoUrl}}">
+                            <!--这里放关注的用户的昵称，仅显示-->
+                            <span id="focus-name" th:text="${f.nickname}">爱放火的安小妮</span>
+                            <!--取消该用户关注-->
+                            <span id="cancel-btn" th:id="${f.id}"   onclick="Focus(this.innerHTML,this.id)" class="cancel-btn">取消关注</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mod" th:fragment="Fans" id="fans1">
+                    <div class="tab-name">我的粉丝</div>
+                    <div class="fans" id="Fans" th:fragment="Fans"  >
+                        <div class="fanmsg"  th:each="fa:${fanMap}">
+                            <!--这里放关注的用户的头像，仅显示-->
+                            <img src="img/focus-img.jpg" alt="fans-img" id="fans-img" th:src="@{${fa.value.photoUrl}}">
+                            <!--这里放关注的用户的昵称，仅显示-->
+                            <span id="fans-name" th:text="${fa.value.nickname}">爱放火的安小妮</span>
+                            <!--是否互关-->
+                            <p id="huguan" th:text="${fa.key}"style="display: none"></p>
+                            <!--取消该用户关注-->
+                            <span id="focus-btn" th:id="${fa.value.id}"  class="Fspan" th:text="${fa.key==fa.value.id}?'取消关注':'关注'"  onclick="Focus(this.innerHTML,this.id)" >+关注</span>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--修改头像的弹出框-->
+    <div id="alert">
+            <h3 class="uppic">上传头像</h3>
+            <div>
+                <img class="close" id="mclose" src="img/close.png" th:src="@{/asserts/img/close1.png}">
+            </div>
+            <div class="vicp-step1">
+                <div class="vice-drop-area">
+                    <img src="img/上传图片.svg" th:src="@{/asserts/img/上传图片.svg}">
+                    <span>点击图片至此处</span>
+                    <input type="file" style="opacity: 0" id="img-file">
+                </div>
+                <div class="vice-operate">
+                    <a id="msave">上传并保存</a>
+                </div>
+                <!--选择头像后的预览框显示-->
+                <div class="yulan"><img id="yulan" src=""></div>
+            </div>
+            <p class="img_tip1">图片宽度*高度至少为150*150像素，大小不超过2MB</p>
+        </div>
+    <div id="mask1"></div><!--  遮罩层div--> 
+
+
+    <!--修改资料的弹出框-->
+    <div id="malert">
+        <form>
+            <div>
+                <label>昵称：</label>
+                <input type="text" id="name1" th:value="${p.nickname}">
+            </div>
+            <div>
+                <label>密码：</label>
+                <input type="text" id="pwd1" th:value="${p.password}">
+            </div>
+            <div>
+                <label>确认密码：</label>
+                <input type="text" id="repwd1">
+                <p class="warn"></p>
+            </div>
+            <div>
+                <label>感悟：</label>
+                <input type="text" id="think1" maxlength="27" th:value="${p.inspiration}">
+                <span id="wordnumber"  ></span>
+            </div>
+            
+            <div>
+                <input  type="button" value="确认修改" id="btn2">
+            </div>
+        </form>
+        <img src="img/close.png" th:src="@{/asserts/img/close1.png}" id="pic2">
+    </div>
+    <div id="mask2"></div><!--  遮罩层div-->
+
+
+    <!--上传书籍的弹出框-->
+    <div id="upld">
+        <div class="uptitle"><img src="../personal-center/img/上传书籍.svg" th:src="@{/asserts/img/上传书籍.svg}">上传书籍</div>
+        <div class="upclose"><img id="upclose" src="../personal-center/img/close.png" th:src="@{/asserts/img/close1.png}"/></div>
+        <hr/>
+        <div class="upimg">
+            <div><img id="img1" src="" alt=""></div>
+            <p class="up1">选择封面</p>
+            <input id='bookimg-file' type="file"  style="opacity:0;"> 
+        </div>
+        <div class="uplabel">
+            <img src="img/添加.svg" th:src="@{/asserts/img/添加.svg}" alt="Add">
+            <span class="varity">标签分类 ：</span>
+            <p>
+                <span style="vertical-align: middle;"><input type="checkbox"  name="catogory" value="小说" style="vertical-align: middle;" id="check1" class="check"><label for="check1"></label>小说</span>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="科技教育" style="vertical-align: middle;" id="check2" class="check"><label for="check2"></label>科技教育</span>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="文艺" style="vertical-align: middle;" id="check3" class="check"><label for="check3"></label>文艺</span><br>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="历史文化" style="vertical-align: middle;" id="check4" class="check"><label for="check4"></label>历史文化</span>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="经济管理" style="vertical-align: middle;" id="check5" class="check"><label for="check5"></label>经济管理</span>
+            </p>
+            <p id="varity" style="margin-left:22px;"></p>
+        </div>
+        <div class="upname">
+            <label>书名：</label>
+            <input id="upname" type="text">
+            <span style="font-size:12px;color:red; display: none">请填写书名！</span>
+        </div>
+        <div class="upauthor">
+            <label>作者：</label>
+            <input id="upauthor" type="text">
+            <span style="font-size:12px;color:red;display: none">作者不能为空！</span>
+        </div>
+        <div class="wangpan">
+            <label>网盘：</label>
+            <input id="wangpanurl" type="url"> 
+        </div>
+        <div class="way">
+            <label>线下联系：</label>
+            <input id="wayconnect" type="text">
+            <span style="font-size:12px;color:red;display: none">请填写任意一种分享方式！</span>
+        </div>
+        <div class="suibi">
+            <label>随笔：</label>
+            <textarea id="suibi" cols="30" rows="6" style="vertical-align: middle"></textarea>
+            <span style="font-size:12px;color:red;display: none">随笔不能为空！</span>
+        </div>   
+        <div class="btn3" id="newBook">上传</div>
+        <span>书籍封面一经上传，不可更改！</span>
+    </div>
+    <div id="mask3"></div><!--  遮罩层div--> 
+
+
+    <!--修改书籍信息的弹出框-->
+    <div id="upld1">
+        <p id="BookId" style="display: none"></p>
+        <div class="uptitle2">修改资料</div>
+        <div class="upclose2"><img id="upclose2" src="../personal-center/img/close.png" th:src="@{/asserts/img/close1.png}"/></div>
+        <hr/>
+        <div class="upimg2">
+            <div><img id="img2" src="" alt=""></div>
+        </div>
+        <div class="uplabel2">
+            <img src="img/添加.svg" th:src="@{/asserts/img/添加.svg}" alt="Add">
+            <span class="varity2">标签分类 ：</span>
+            <p>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="小说" style="vertical-align: middle;" id="check6" class="check_c"><label for="check6"></label>小说</span>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="科技教育" style="vertical-align: middle;" id="check7" class="check_c"><label for="check7"></label>科技教育</span>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="文艺" style="vertical-align: middle;" id="check8" class="check_c"><label for="check8"></label>文艺</span><br>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="历史文化" style="vertical-align: middle;" id="check9" class="check_c"><label for="check9"></label>历史文化</span>
+                <span style="vertical-align: middle;"><input type="checkbox" name="catogory" value="经济管理" style="vertical-align: middle;" id="check10" class="check_c"><label for="check10"></label>经济管理</span>
+            </p>
+            <p id="varity2" style="margin-left:22px;"></p>
+        </div>
+        <div class="upname2">
+            <label>书名：</label>
+            <input id="upname2" type="text">
+            <span style="font-size:12px;color:red; display: none">书名不能为空！</span>
+        </div>
+        <div class="upauthor2">
+            <label>作者：</label>
+            <input id="upauthor2" type="text">
+            <span style="font-size:12px;color:red; display: none">作者不能为空！</span>
+        </div>
+        <div class="wangpan2">
+            <label>网盘：</label>
+            <input id="wangpanurl2" type="url"> 
+        </div>
+        <div class="way2">
+            <label>线下联系：</label>
+            <input id="wayconnect2" type="text">
+            <span style="font-size:12px;color:red; display: none">请填写任意分享方式！</span>
+        </div>
+        <div class="suibi2">
+            <label>随笔：</label>
+            <textarea id="suibi2" cols="30" rows="6" style="vertical-align: middle"></textarea>
+            <span style="font-size:12px;color:red; display: none">随笔不能为空！</span>
+        </div>   
+        <div class="btn4"><span id="updataBook">上传</span></div>
+        <span>书籍封面不可更改！</span>
+    </div>
+    <div id="mask4"></div><!--  遮罩层div-->
+    <!--修改书籍状态的弹出框start-->
+    <div id='alert5'>
+        <div class="contitle">修改书籍借阅状态</div>
+        <img id='close5' src="../personal-center/img/close.png" th:src="@{/asserts/img/close.png}">
+        <form name="iForm" method="post" action="" class="form1">
+            <input type="radio" name="radiocon" id="rdo1" checked value="可借阅"><label for="rdo1" >可借阅</label><br>
+            <input type="radio" name="radiocon" id="rdo2" value="不可借阅"><label for="rdo2" >不可借阅</label>
+            <p id="Status_book_id" style="display: none"></p>
+        </form>
+        <div class="status_btn" id="status_btn">确定</div>
+    </div>
+    <div id="mask5"></div><!--  遮罩层div-->
+    <!--修改书籍状态的弹出框end-->
+
+</body>
+<script >
+    jQuery(function(){
+        var inspir = jQuery("#think1").val();
+        // alert(inspir);
+        if(inspir==""){
+           jQuery("#wordnumber").html(27)
+        }else {
+            jQuery("#wordnumber").html(27-inspir.length);
+        }
+    })
+</script>
+</html>

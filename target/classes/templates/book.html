@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${deMsg.bookModel.book_name}">Title</title>
+    <script src="jquery-3.3.1.js" th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <link rel="stylesheet" href="book.css" th:href="@{/asserts/css/book.css}" >
+    <link rel="stylesheet" th:href="@{/asserts/css/exit.css}">
+
+
+    <script th:src="@{/asserts/js/userRegister.js}"></script>
+    <script src="book.js"  th:src="@{/asserts/js/ShareBook.js}"></script>
+    <script src="myFunc.js" th:src="@{/asserts/js/myFunc.js}"></script>
+    <script src="book.js"  th:src="@{/asserts/js/book.js}"></script>
+    <script src="book.js"  th:src="@{/asserts/js/exit.js}"></script>
+
+
+</head>
+<body>
+<div class="notice-box" style="display: none">
+    <div>
+        <img src="img/提醒.svg" th:src="@{/asserts/img/提醒.svg}">
+        <span class="notice-msg"></span>
+    </div>
+</div>
+<!--返回顶部-->
+<span id="top"></span>
+<!--导航条-->
+<div th:replace="commons/commonsTOP::TOP"></div>
+<p id="UserId" th:if="${session.user!=null}" th:text="${session.user.id}" style="display: none"></p>
+<!--书籍展示界面-->
+<div class="bigbox">
+    <img src="image/book_bg4.jpg" th:src="@{/asserts/img/book_bg4.jpg}" class="bg" alt="" style="width: 1000px;height: 550px;margin:30px 200px">
+    <img src="image/bg.jpg" th:src="@{/asserts/img/bg.jpg}" alt="" class="book_bg">
+    <img src="image/time2.jpg" th:src="@{${deMsg.bookModel.coverUrl}}" class="book" alt="">
+    <div class="book_content">
+        <table>
+
+
+            <tr>
+                <th style="letter-spacing: 15px">书名:</th>
+                <!--书名-->
+                <td id="bookName" th:text="${deMsg.bookModel.book_name}">《会消失的人》</td>
+                <!--书的id-->
+                <p id ="bookId" th:text="${deMsg.bookModel.id}" th:hidden="hidden" ></p>
+            </tr>
+            <tr>
+                <th style="letter-spacing: 15px">作者:</th>
+                <!--作者-->
+                <td th:text="${deMsg.bookModel.author}">XXX</td>
+            </tr>
+            <tr>
+                <th style="letter-spacing: 8px">分享者:</th>
+                <!--书本的拥有者  存放在users 的第一项-->
+                <td th:text="${deMsg.owner.nickname}">XXX</td>
+            </tr>
+            <tr >
+                <th style="letter-spacing: 4px">内容简介:</th>
+                <td style="display: block;text-indent: 2em" th:text="${deMsg.bookModel.text}">美国芝加哥大学教授艾恺著有《最后的儒家——梁漱溟与中国现代化的两难》
+                    一书。艾氏为印证事实，订正该书未尽正确、周详之处，1980年8月特来华专
+                    访梁漱溟先生，长谈十余次。 谈话中，梁氏论述了儒家、佛家、道家的文化
+                    特点及代表人物，涉及诸多政治文化名人，包括李大钊、陈独秀、毛泽东、
+                    周恩来、蒋介石、康有为、章太炎、胡适、冯友兰等等，回顾了他一生的重
+                    要活动——任教北大、从事乡建运动、创建民主同盟…… 书中内容丰富，
+                    因此可作为了解与研究梁漱溟思想与活动及近代中国社会生活的重要参考。
+                </td>
+            </tr>
+            <tr>
+                <th style="letter-spacing: 4px">百度网盘：</th>
+                <!--用户提供的获方式-->
+                <td th:text="${deMsg.bookModel.bookSource.wangpan}"><a href="">xxxx</a></td>
+            </tr>
+            <tr>
+                <th style="letter-spacing: 4px">线下获取：</th>
+                <!--用户提供的获方式-->
+                <td th:text="${deMsg.bookModel.bookSource.xianxia}"><a href="">xxxx</a></td>
+            </tr>
+            <tr>
+                <!--对书籍的点赞-->
+                <td>
+                    <div class="book_like">
+                        <span href="" id="ZanCount" style="cursor: pointer;">
+                            <img src="image/点赞前.png" th:src="@{/asserts/img/点赞前.png}" alt="">
+                            <label>(已有 <span id="Count" th:text="${deMsg.bookModel.zanCount}">xxx</span>人点赞)</label>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div class="book_comment">
+    <div class="comment_header">
+        <p>最新评论</p>
+    </div>
+    <div class="comment_center">
+        <input type="text" class="publish" disabled>
+        <img src="image/发表评论.png" th:src="@{/asserts/img/发表评论.png}" alt="" class="publish_img">
+        <p class="publish_text">发表评论</p>
+        <div class="messageList">
+
+        </div>
+        <!--循环-->
+        <div class="part" th:each="u:${deMsg.users}" >
+            <!--用户的头像-->
+            <img src="image/头像.jpg" th:src="@{${u.photoUrl}}" alt="">
+            <div class="usercomment">
+                <table>
+                    <tr>
+                        <td style="font-family:'黑体';font-size: 16px; font-weight: bold;" th:text="${u.nickname}"><span style="color: darksalmon;font-size: 18px;">哈姆雷特:</span></td>
+                    </tr>
+                    <tr>
+                        <!--用户对这本书的评价-->
+                        <td style="display: block;text-indent: 2em" th:text="${u.comment.comment}"> 一书。艾氏为印证事实，订正该书未尽正确、周详之处，1980年8月特来华专
+                            访梁漱溟先生，长谈十余次。 谈话中，梁氏论述了儒家、佛家、道家的文化
+                            <!--特点及代表人物，涉及诸多政治文化名人，包括李大钊、陈独秀、毛泽东、-->
+                            <!--周恩来、蒋介石、康有为、章太炎、胡适、冯友兰等等，回顾了他一生的重-->
+                            <!--要活动——任教北大、</td>-->
+                    </tr>
+                </table>
+                <!--点赞数和发表日期-->
+                <div class="like_count">
+                    <!--评价的时间-->
+                    <time th:text="${u.comment.date}">2019年5月18日</time>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--评论蒙版-->
+<div id="write_panel"></div>
+<div class="write" id="write">
+    <p class="write_head">添加评论 - 书名:《<span th:text="${deMsg.bookModel.book_name}">书名</span>》</p>
+    <img src="image/comment.jpg" th:src="@{/asserts/img/comment.jpg}" alt="" id="write_img">
+    <img src="image/关 闭.png" th:src="@{/asserts/img/关 闭.png}" alt="" class="close_img">
+    <div class="center">
+        <textarea class="comment" placeholder="期待你的神评论"> </textarea>
+        <p class="rest">字数还剩<span id="rest_num">300</span>个字</p>
+        <input type="button" value="发布" class="send" disabled>
+    </div>
+</div>
+
+</body>
+<script >
+
+
+</script>
+</html>

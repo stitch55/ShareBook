@@ -1,0 +1,1056 @@
+*{
+    padding: 0;
+    margin:0; 
+    list-style-type: none;
+    position: relative;
+}
+html, body 
+{  
+    height: 100%;  
+    width: 100%;  
+}
+/*提示弹窗*/
+.notice-box
+{
+    position: fixed;
+    left:45%;
+    top:30px;
+    width: 200px;
+    height: 80px;
+    background-color: rgba(255, 252, 251, 0.55);
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 0 #838383;
+    tansition:all .5s ease-in-out;
+    line-height: 80px;
+    z-index: 9999;
+    vertical-align: middle;
+}
+.notice-box>div
+{
+    position: relative;
+    left:20px;
+}
+.notice-box img{
+    width:30px;
+    height: 30px;
+    vertical-align: middle;
+}
+/*修改头像弹出框*/
+#alert {
+    border: 1px solid rgb(174, 209, 243);  
+    width: 700px;  
+    height: 290px;  
+    z-index: 1000;  
+    position: absolute;
+    display:block;
+    display: none;
+    background-color:white;
+}
+#alert h3
+{
+    font-size:16px;
+    width:80%;
+    margin-top:10px;
+    margin-left:15px;
+}
+#alert img
+{
+    position: relative;
+    left:670px;
+    top:-20px;
+    width:16px;
+    height:16px;
+    margin-top:0px;
+}
+#alert .vicp-step1
+{
+    position:absolute;
+    left:50px;
+    top:50px;
+    width:85%;
+    height: 60%;
+    background-color:#e9eff5;
+    border: 1px dashed gray;
+}
+/*选择头像后的预览框样式设置*/
+#alert .vicp-step1 #yulan
+{
+    position:absolute;
+    top:20px;
+    left:36%;
+    width:140px;
+    height:140px;
+    background-color:#69bead;
+    border-radius: 70px;
+    display:none;
+}
+#alert p
+{
+    position:absolute;
+    bottom: 43px;
+    left:50px;
+    color:rgb(167, 167, 167);
+}
+#alert .vicp-step1 img,#alert .vicp-step1 input
+{
+    position:absolute;
+    top:50px;
+    left:260px;
+    width:60px;
+    height:50px;
+}
+#alert .vicp-step1 span
+{
+    position:absolute;
+    top:110px;
+    left:240px;
+    color:rgb(90, 85, 85);
+}
+#alert .vicp-step1 .vice-operate
+{
+    position:absolute;
+    top:195px;
+    right:0;
+    width:100px;
+    text-align: center;
+    height:35px;
+    line-height: 35px;
+    background-color:rgb(184, 241, 236);
+    border-radius:8px;
+}
+#mask1
+{
+    position:absolute;
+    top:0; left:0; 
+    height:100%;
+    width:100%; 
+    background:gray;
+    opacity:0.3; 
+    display:none; 
+    z-index:1;
+}  
+/************************************************/
+#header
+{
+    width:100%;
+    height:56px;
+    background-color:#c7f0e8;
+}
+#header .title img
+{
+    position: absolute;
+    left:100px;
+    width:100px;
+    height:56px;
+    border-radius: 14px;
+}
+#header .goback
+{
+    position: absolute;
+    right:100px;
+    height:56px;
+    line-height: 56px;
+    background-color:#c7f0e8;
+}
+#header .goback a
+{
+    text-decoration: none;
+    color:white;
+    background-color:#c7f0e8;
+}
+#header .goback a:hover
+{
+    color:rgb(66, 62, 62);
+    font-weight: bold;
+}
+#nav .tab
+{
+    position: absolute;
+    left:230px;
+    top:200px;
+}
+#nav .tab li
+{
+    width: 100px;
+    height:40px;
+    line-height: 40px;
+    background-color:#c7f0e8;
+    color:gray;
+    border-radius:10px;
+    cursor: pointer;
+}
+#nav .tab li+li{
+    border-top:1px solid rgb(250, 240, 228);
+    margin-bottom:35px;
+    margin-top:35px;
+}
+#nav .tab li.select
+{
+    font-weight: bold;
+    background-color: rgb(252, 245, 237);
+}
+#nav .tab li img
+{
+    width:20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right:11px;
+}
+#content
+{
+    position: relative;
+    top:80px;
+    left:420px;
+    width:60%;
+    height:600px;
+    border: 1px solid rgb(245, 200, 117);
+}
+#content   .mod
+{
+    width:100%;
+    height:500px;
+    display: none;
+}
+#content  .mod:first-child
+{
+    display: block;
+}
+#content .mod .tab-name
+{
+    height:50px;
+    line-height: 50px;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left:38px;
+}
+#content .mod .hl1
+{
+    width:90%;
+    margin:0 auto;
+}
+#content .mod .user-info
+{
+    position: relative;
+    width:90%;
+    height: 449px;
+    margin:0 auto;
+}
+#content .mod .user-info .user-pic
+{
+    position: absolute;
+    left:0;
+    top:20px;
+    width:20%;
+    height:100px;
+}
+#content .mod .user-info .user-msg
+{
+    position: absolute;
+    right: 0;
+    top:20px;
+    width: 86%;
+    height: 449px;
+}
+#content .mod .user-info .user-msg p
+{
+    width:100%;
+}
+#content .mod .user-info .user-msg p label
+{
+    display:inline-block;
+    width:140px;
+    height:30px;
+    background: -webkit-linear-gradient(rgb(243, 229, 229), #c7f0e8); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgb(243, 229, 229), #c7f0e8); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgb(243, 229, 229), #c7f0e8); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgb(243, 229, 229), #c7f0e8); /* 标准的语法（必须放在最后） */
+    text-align: end;
+    border-radius: 10px;
+    line-height:30px;
+}
+#content .mod .user-info .user-pic img
+{
+    width:100px;
+    height: 100px;
+    border-radius: 50px;
+    border:1px solid #c8cccb;
+}
+#content .mod .user-info .user-pic .modify
+{
+    position: relative;
+    left:25px;
+    top:8px;
+    color: #69bead;
+    font-size:13px;
+}
+#content .mod .user-info .user-msg p
+{
+    margin-top:20px;
+    width:100%;
+}
+#content .mod .user-info .user-msg .user-name  #modifymsg
+{
+    position:absolute;
+    top:4px;
+    left:300px;
+    color: #69bead;
+    display: inline-block ;
+    margin-left:310px;
+}
+#content .mod .user-info .user-msg #user-content
+{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#content .mod .user-focus>.focus
+{
+    width:100%;
+    height:80px;
+    border-top: 1px solid gray;
+    line-height: 80px;
+}
+#content .mod .user-focus .focus #focus-img
+{
+    margin-left:10px;
+    width:70px;
+    height:70px;
+    border-radius:35px;
+    border: 1px solid rgb(240, 238, 238);
+    vertical-align: middle;
+    line-height: 80px;
+}
+#content .mod .user-focus .focus #focus-name
+{
+    vertical-align: middle;
+    margin-left:10px;
+}
+#content .mod .user-focus .focus .cancel-btn
+{
+    display: inline-block;
+    width:80px;
+    height:35px;
+    text-align: center;
+    line-height:40px;
+    background-color: #afebdf78;
+    border-radius: 10px;
+    position:absolute;
+    left: 750px;
+    top:20px;
+    vertical-align: middle;
+    color:gray;
+}
+#book{
+    position:relative;
+    left:240px;
+    top:25px;
+    height: 500px;
+    width: 430px;
+}
+#book > div{
+    height: 500px;
+    width: 430px;
+    position: absolute;
+    left: 220px;
+    top: 0;
+    transform-origin: left;
+    transition: 1s;
+    -webkit-box-shadow: 0 0 11px rgba(65, 63, 63, 0.5);
+    border-radius: 10px;
+    background-color:rgb(252, 253, 229);
+}
+#cover
+{
+    position: absolute;
+    left: 458px;
+    top: 76px;
+    height: 500px;
+    width: 430px;
+    transform-origin: left;
+    transition: 1s;
+    -webkit-box-shadow: 0 0 11px rgba(65, 63, 63, 0.5);
+    border-radius: 10px;
+    background-color:rgb(252, 253, 229);
+    background-image: url("/asserts/img/cover.jpg");
+    background-size:100%;
+}
+#tuzi{
+    position: absolute;
+    left:120px;
+    top:200px;
+    width: 200px;
+}
+
+#book .page
+{
+    position: absolute;
+}
+#book .page .book-top
+{
+    position: relative;
+    width:100%;
+    height:50%;
+}
+#book .page .book-bottom
+{
+    position: relative;
+    width:100%;
+    height:50%;
+}
+#book .page .book-top .top-left
+{
+    position: absolute;
+    left:0;
+    width:45%;
+    height:100%;
+    background-color:rgb(255, 253, 243);
+    border-radius: 5px;
+}
+#book .page .book-top .top-left #book-label
+{
+    display:inline-block;
+    margin:0 auto;
+    margin-top:220px;
+    margin-left:25px;
+    font-size:13px;
+    background-color:#c7f0e8;
+    border-radius:5px;
+}
+#book .page .book-top .top-right
+{
+    position: absolute;
+    right:0;
+    width:55%;
+    height:100%;
+    font-weight:bold;
+}
+#book .page .book-top .top-right span{font-weight:normal;}
+#book .page .book-top .top-left img
+{
+    position: absolute;
+    top:15px;
+    left:8px;
+    width:90%;
+    height:80%;
+}
+#book .page .book-top .top-right .method,
+#book .page .book-top .top-right .title,
+#book .page .book-top .top-right .author
+{
+    display: inline-block;
+    width:100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+#book .page .book-top .top-right .method:hover,
+#book .page .book-top .top-right .title:hover,
+#book .page .book-top .top-right .author:hover
+{
+    display: inline-block;
+    width:100%;
+    word-wrap: break-word;
+    white-space: normal;
+}
+#book .page .book-top .top-right>div
+{
+    margin-top:8px;
+}
+#book .page .book-bottom .title
+{
+    width:50%;
+    height:30px;
+    margin:3px auto;
+    font-weight: bold;
+    text-align: center;
+}
+#book .page .book-bottom .content
+{
+    position: absolute;
+    width:100%;
+    height:115px;
+    top:40px;
+    text-indent: 28px;
+    overflow: auto;
+    background-color:rgb(255, 253, 243);
+    border-radius: 15px;
+
+}
+#book .page .book-bottom .modify-btn
+{
+    position: absolute;
+    margin-top:130px;
+    left:60px;
+    width:80px;
+    height: 30px;
+    line-height: 30px;
+    text-align:center;
+    border-radius:7px;
+    font-size: 13px;
+    z-index:1000px;
+    background-color:#c7f0e8;
+}
+#book .page .book-bottom .delete-btn
+{
+    position: absolute;
+    margin-top:130px;
+    left:160px;
+    width:80px;
+    height: 30px;
+    line-height: 30px;
+    text-align:center;
+    border-radius:7px;
+    font-size: 13px;
+    z-index:1000px;
+    background-color:#c7f0e8;
+}
+#book .page .book-bottom  .con-btn
+{
+    position: absolute;
+    margin-top:130px;
+    left:258px;
+    width:90px;
+    height: 30px;
+    line-height: 30px;
+    text-align:center;
+    border-radius:7px;
+    font-size: 13px;
+    z-index:1000px;
+    background-color:#c7f0e8;
+}
+
+#book .page .book-bottom .modify-btn:hover,
+#content .mod .user-focus .focus .cancel-btn:hover,
+#content .mod .fans .fanmsg .Fspan:hover,
+#book .page .book-bottom .delete-btn:hover,
+.mod #uploadbook:hover,
+#book .page .book-bottom .con-btn:hover
+{
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    font-weight:bold;
+    background-color:#b4faed65;
+}
+@keyframes shake
+{
+    10%, 90% { transform: translate3d(-1px, 0, 0); }
+    20%, 80% {transform: translate3d(2px, 0, 0); }
+    30%, 50%, 70% {transform: translate3d(-4px, 0, 0);}
+    40%, 60% {transform: translate3d(4px, 0, 0);}
+}
+#content .mod .fans 
+{
+    position: relative;
+    width:100%;
+    height:89.7%;
+}
+#content .mod .fans>.fanmsg
+{
+    width:100%;
+    height:80px;
+    border-top: 1px solid gray;
+    line-height: 80px;
+}
+#content .mod .fans .fanmsg #fans-img
+{
+    margin-left:10px;
+    width:70px;
+    height:70px;
+    border-radius:35px;
+    border: 1px solid rgb(240, 238, 238);
+    vertical-align: middle;
+    line-height: 80px;
+}
+#content .mod .fans .fanmsg #fans-name
+{
+    vertical-align: middle;
+    margin-left:10px;
+}
+#content .mod .fans .fanmsg .Fspan
+{
+    display: inline-block;
+    width:80px;
+    height:35px;
+    text-align: center;
+    line-height:40px;
+    background-color: #c7f0e878;
+    border-radius: 10px;
+    position:absolute;
+    left: 750px;
+    top:20px;
+    vertical-align: middle;
+    color:gray;
+}
+/*修改资料弹出框*/
+#malert {
+    position: absolute;
+    display:none;
+    font-size:14px;
+    border: 1px solid #c7f0e878;
+    border-radius:20px;
+    min-width: 380px;  
+    max-width: 500px;  
+    width:auto !important;
+    min-height: 420px;  
+    max-height: 600px;
+    height: auto !important;
+    z-index: 1000;  
+    background-color:white;
+}
+#malert div
+{
+    margin-top:40px;
+    width:100%;
+}
+#malert div label
+{
+    display: inline-block;
+    width:100px;
+    text-align: end;
+}
+#malert div input
+{
+    width:198px;
+    height:33px;
+    border:2px solid #c7f0e8;
+    border-radius: 7px;
+    outline: none;
+    -webkit-appearance: none;
+}
+#malert #btn2
+{
+    position:absolute;
+    left:40%;
+    width:80px;
+    border: 0;
+}
+#malert #pic2
+{
+    display: inline-block;
+    width:16px;
+    height: 16px;
+    position: absolute;
+    right:5px;
+    top:5px;
+}
+#malert .warn{
+    margin-left:108px;
+    color:red;
+    font-size:12px;
+}
+#mask2
+{
+    position:absolute;
+    top:0; left:0; 
+    height:100%;
+    width:100%; 
+    background:rgb(77, 75, 75);
+    opacity:0.3; 
+    display:none; 
+    z-index:1;
+} 
+/*上传书籍弹出框*/
+.mod #uploadbook
+{
+    position:absolute;
+    top:8px;
+    left:760px;
+    width:110px;
+    height: 40px;
+    background-color: #c7f0e8;
+    border-radius: 15px;
+    line-height:40px;
+    text-align: center;
+} 
+.mod #uploadbook img
+{
+    width:23px;
+    height:23px;
+    vertical-align: middle;
+}
+
+/*上传书籍的弹出框*/
+#upld {
+    position: absolute;
+    display:none;
+    font-size:14px;
+    border: 1px solid gray;
+    border-radius:10px;
+    min-width: 700px;  
+    max-width: 700px;  
+    width:auto !important;
+    min-height: 500px;  
+    max-height: 1000px;
+    height: auto !important;
+    z-index: 1000;  
+    background-color:white;
+}
+#upld .uptitle
+{
+    position:absolute;
+    top:5px;
+    left:20px;
+    width:110px;
+    height: 40px;
+    border-radius: 15px;
+    line-height:40px;
+    text-align: center;
+    font-weight: bold;
+    font-size:16px;
+}
+#upld .uptitle img
+{
+    width:23px;
+    height:23px;
+    vertical-align: middle;
+}
+#upld .upclose img
+{
+    position:absolute;
+    right:0;
+}
+#upld hr
+{
+    position:absolute;
+    top:50px;
+    left:30px;
+    width:88%;
+}
+#upld .upimg
+{
+    position:absolute;
+    top:55px;
+    left:140px;
+}
+#upld .upimg div
+{
+    width:140px;
+    height: 180px;
+    border:1px dashed gray;
+}
+
+#upld .uplabel
+{
+    position: absolute;
+    left:298px;
+    top:148px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: middle;
+}
+#upld .uplabel img{
+    vertical-align: middle;
+    border-radius: 8px;
+    background-color:#c7f0e8;
+}
+#upld #img1
+{
+    width:140px;
+    height: 180px;
+}
+#upld input
+{
+    height:25px;
+}
+#upld .upimg .up1,#upld .upimg input
+{
+    position:absolute;
+    left:-86px;
+    top:81px;
+    width:80px;
+    height:25px;
+    line-height:25px;
+    text-align: center;
+    border-radius: 5px;
+    background-color:rgb(214, 242, 246);
+}
+
+#upld .upname
+{
+    margin-top:270px;
+}
+#upld div
+{
+    vertical-align: middle;
+    margin-top:6px;
+}
+#upld>label
+{
+    display: inline-block;
+    width:80px;
+    height:25px;
+    line-height:25px;
+    background-color:rgb(214, 242, 246);
+    margin-left:50px;
+    text-align: end;
+    border-radius:8px;
+}
+#upld .btn3
+{
+    margin-left:200px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    width:50px;
+    height:22px;
+    background-color:rgb(155, 154, 154);
+    color:white;
+    border-radius: 5px;
+    text-align:center;
+}
+#upld>span
+{
+    position: absolute;
+    left:260px;
+    top:510px;
+    font-size:13px;
+    color:rgb(230, 42, 42);
+}
+#mask3
+{
+    position:absolute;
+    top:0; left:0; 
+    height:100%;
+    width:100%; 
+    background:rgb(88, 88, 87);
+    opacity:0.3; 
+    display:none; 
+    z-index:1;
+}
+/*修改书籍信息的弹出框*/
+#upld,#upld1{
+    position: absolute;
+    display:none;
+    font-size:14px;
+    border: 1px solid gray;
+    border-radius:10px;
+    min-width: 500px;  
+    max-width: 500px;  
+    width:auto !important;
+    min-height: 350px;  
+    max-height: 1000px;
+    height: auto !important;
+    z-index: 1000;  
+    background-color:white;
+}
+#upld .uptitle,#upld1 .uptitle2
+{
+    position:absolute;
+    top:5px;
+    left:20px;
+    width:110px;
+    height: 40px;
+    border-radius: 15px;
+    line-height:40px;
+    text-align: center;
+    font-weight: bold;
+    font-size:16px;
+}
+#upld .uptitle img
+{
+    width:23px;
+    height:23px;
+    vertical-align: middle;
+}
+#upld .upclose img,#upld1 .upclose2 img
+{
+    position:absolute;
+    right:0;
+}
+#upld hr,#upld1 hr
+{
+    position:absolute;
+    top:50px;
+    left:30px;
+    width:88%;
+}
+#upld .upimg,#upld1 .upimg2
+{
+    position:absolute;
+    top:55px;
+    left:140px;
+}
+#upld .upimg div,#upld1 .upimg2 div
+{
+    width:140px;
+    height: 180px;
+    border:1px dashed gray;
+}
+
+#upld .uplabel,#upld1 .uplabel2
+{
+    position: absolute;
+    left:298px;
+    top:148px;
+    height: 24px;
+    line-height: 24px;
+    vertical-align: middle;
+}
+#upld .uplabel img,#upld1 .uplabel2 img{
+    vertical-align: middle;
+    border-radius: 8px;
+    background-color:#c7f0e8;
+}
+#upld #img1,#upld1 #img2
+{
+    width:140px;
+    height: 180px;
+}
+#upld input,#upld1 input
+{
+    height:25px;
+}
+#upld .upimg .up1,#upld .upimg input
+{
+    position:absolute;
+    left:158px;
+    top:60px;
+    width:80px;
+    height:25px;
+    line-height:25px;
+    text-align: center;
+    border-radius: 5px;
+    background-color:rgb(214, 242, 246);
+}
+
+#upld .upname,#upld1 .upname2
+{
+    margin-top:270px;
+}
+#upld div,#upld1 div
+{
+    vertical-align: middle;
+    margin-top:6px;
+}
+#upld label,#upld1 label
+{
+    display: inline-block;
+    width:80px;
+    height:25px;
+    line-height:25px;
+    background-color:rgb(214, 242, 246);
+    margin-left:50px;
+    text-align: end;
+    border-radius:8px;
+}
+#upld .btn3,#upld1 .btn4
+{
+    margin-left:200px;
+    margin-top:10px;
+    margin-bottom: 10px;
+    width:50px;
+    height:22px;
+    background-color:#89d5ca;
+    color:white;
+    border-radius: 5px;
+    text-align:center;
+}
+#upld>span,#upld1>span
+{
+    position: absolute;
+    left:260px;
+    top:510px;
+    font-size:13px;
+    color:rgb(230, 42, 42);
+}
+#mask3,#mask4
+{
+    position:absolute;
+    top:0; left:0; 
+    height:100%;
+    width:100%; 
+    background:rgb(88, 88, 87);
+    opacity:0.3; 
+    display:none; 
+    z-index:1;
+}
+input[type=checkbox]{
+    visibility: hidden;
+}
+#upld .check+label,
+#upld1 .check_c+label{
+    display: inline-block;
+    width:13px;
+    height:13px;
+    margin-left:-2px;
+    border:1px solid #b4e7d2;
+    border-radius: 6.5px;
+    background-color:#fffefe;
+    cursor: pointer;
+}
+#upld .check:checked + label:after,
+#upld1 .check_c:checked + label:after{
+    content: "";
+    position: absolute;
+    left:1px;
+    top:1px;
+    width: 6.5px;
+    height: 4px;
+    border: 2px solid #424242;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-60deg);
+    -moz-transform: rotate(-60deg);
+    -webkit-transform: rotate(-60deg);
+}
+/*修改书籍状态弹窗框样式表start*/
+#alert5 {
+    position: absolute;
+    display:none;
+    font-size:14px;
+    border: 1px dashed rgb(154, 226, 198);
+    background-image: url("../img/bgstatus.jpg");
+    background-size:100%;
+    width:400px;
+    height:220px;
+    z-index: 1000;
+}
+#mask5
+{
+    position:absolute;
+    top:0; left:0;
+    height:100%;
+    width:100%;
+    background:rgb(131, 125, 125);
+    opacity:0.3;
+    display:none;
+    z-index:1;
+}
+.form1
+{
+    position: relative;
+    left:35%;
+    top:33%;
+}
+.form1 input{  margin-bottom: 20px;}
+.form1 label{width:60px; height:30px;}
+#alert5 .contitle
+{
+    font-family: "幼圆";
+    font-size: 20px;
+    margin-left:15px;
+    margin-top:10px;
+    font-weight: bold;
+}
+#alert5 #close5{
+    position:absolute;
+    right:4px;
+    top:4px;
+}
+#alert5 .status_btn{
+    position:absolute;
+    right:35px;
+    bottom: 4px;
+    width:52px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 5px;
+    background-color:bisque;
+}
+
+/*修改书籍状态弹窗框样式表end*/
+
+

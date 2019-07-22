@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jquery兼容好的翻页</title>
+    <link rel="stylesheet" type="text/css" href="zxf_page.css"/>
+    <link rel="stylesheet" href="lookmore.css">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="zxf_page.js"></script>
+
+</head>
+<body>
+
+
+<!--翻页-->
+
+<div class="zxf_pagediv"></div>
+<!--返回顶部-->
+<span id="top"></span>
+<!--导航条-->
+<div class="header-box">
+    <div id="header" class="nologin-index" >
+        <div class="wrapper wrapper-996">
+            <div class="menu-bar">
+                <div class="left-part">
+                    <ul class="nav">
+                        <li><img src="image/logo.png" alt=""></li>
+                        <li><a href="/" data_title="home" class="header-item active">首页</a></li>
+                        <li><a href="/" class="header-item">社区</a></li>
+                        <li><a href="/" class="header-item">关于</a></li>
+                        <li class="type"><a href="/" class="header-item">分类</a>
+                            <ul class="sub">
+                                <li>小说</li>
+                                <li>文艺</li>
+                                <li>历史文化</li>
+                                <li>经济/管理</li>
+                                <li>心理/励志</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--主题内容-->
+<div class="bt-body">
+    <div class="main-body">
+        <!--小说类-->
+        <div class="bt-module">
+            <!--分类标题-->
+            <div class="module-tit">
+                <h2><a href="" target="_blank">小 说</a></h2>
+                <p>
+                    <span>—————</span>
+                    NOVEL
+                    <span>—————</span>
+                </p>
+            </div>
+            <!--素材列表-->
+            <div class="bt-list">
+                <ul class="clearfix">
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <img class="bg-img" src="http://pic.ibaotu.com/01/36/63/55R888piC2zh.jpg-0.jpg!w340" alt="">
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>《活着》</p>
+                            <p><span>· 作 者:</span> &nbsp;余 华</p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="image/timg.jpg" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>《活着》</p>
+                            <p><span>· 作 者:</span> &nbsp;余 华</p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span></span></p>
+                            <p><span></span> </p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span></span></p>
+                            <p><span></span> </p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span></span></p>
+                            <p><span></span> </p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span></span></p>
+                            <p><span></span> </p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span></span></p>
+                            <p><span></span> </p>
+                        </a>
+                    </li>
+                    <li class="sc-home-ad">
+                        <a href="" class="jump-details jump-details-seo">
+                            <div class="blank">
+                                <img class="bg-img" src="image/bg.jpg"/>
+                                <img class="book-img" src="" alt="">
+                            </div>
+                            <p><span></span></p>
+                            <p><span></span> </p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    //翻页
+    jQuery(".zxf_pagediv").createPage({
+        pageNum: 20,
+        current: 6,
+        backfun: function(e) {
+            //console.log(e);//回调
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+.exit{
+    width: 150px;
+    height: 160px;
+    background-color: white;
+    position: fixed;
+    border: 1px solid #f8f8f8;
+    right: 10px;
+    top: 40px;
+    border-radius: 8px;
+    display: none;
+}
+.exit .info{
+    width: 100%;
+    height: 70px;
+    background-color: #add5cd;
+    border-radius: 8px;
+}
+#exit_ul{
+    margin-top: 10px;
+    width: 100%;
+    height: 70px;
+}
+#exit_ul li{
+    width: 100%;
+    height: 35px;
+    position: relative;
+    margin-bottom: 5px;
+}
+#exit_ul li img{
+    position: absolute;
+    left: 28px;
+    top: 3px;
+}
+#exit_ul li a{
+    position: absolute;
+    left: 65px;
+    top: 5px;
+}
+#exit_ul li:hover{
+    background-color: #add5cd;
+}

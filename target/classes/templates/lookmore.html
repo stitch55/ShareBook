@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${typeName}]]</title>
+    <link rel="stylesheet" href="lookmore.css" th:href="@{/asserts/css/lookmore.css}">
+    <link rel="stylesheet" href="exit.css" th:href="@{/asserts/css/exit.css}">
+
+    <script src="jquery-3.3.1.js" th:src="@{/webjars/jquery/3.3.1-1/jquery.min.js}"></script>
+    <script type="text/javascript" src="zxf_page.js" th:src="@{/asserts/js/PageNumber.js}"></script>
+    <script src="book.js"  th:src="@{/asserts/js/exit.js}"></script>
+
+</head>
+<script>
+    //导航栏中的类别请求
+    function topGetBooks(type){
+        jQuery("#TypeName").load("/TypeName",{
+            "type":type,
+            "page":1
+        })
+        jQuery("#MoreBooks").load("/MoreBooks",{
+            "type":type,
+            "page":1
+        })
+        jQuery("#PageNumber").load("/pageNumber",{
+            "type":type,
+            "page":1
+        })
+    }
+</script>
+<body>
+
+
+<!--翻页-->
+<!--返回顶部-->
+<span id="top"></span>
+<!--导航条-->
+
+<div class="header-box">
+    <div id="header" class="nologin-index" >
+        <div class="wrapper wrapper-996">
+            <div class="menu-bar">
+                <div class="left-part">
+                    <ul class="nav">
+                        <li><img src="image/logo.png" th:src="@{asserts/img/logo.png}" alt=""></li>
+                        <li><a href="/" data_title="home" class="header-item active">首页</a></li>
+                        <li><a href="/" class="header-item" th:href="@{/community}">社区</a></li>
+                        <!--<li><a href="/" class="header-item">关于</a></li>-->
+                        <li class="type"><a href="/" class="header-item">分类</a>
+                            <ul class="sub">
+
+                               <li onclick="topGetBooks(1)" >  小说</li>
+                       <li onclick="topGetBooks(2)"> 科技教育</li>
+                       <li onclick="topGetBooks(3)" > 文艺</li>
+                       <li onclick="topGetBooks(4)" > 历史文化</li>
+                       <li onclick="topGetBooks(5)" > 经济/管理</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            <!--登录之后的显示-->
+                <div th:replace="commons/commonsTOP::Login"></div>
+            </div>
+        </div>
+    </div>
+</div></div>
+
+<!--主题内容-->
+<div class="bt-body">
+    <div class="main-body">
+        <!--小说类-->
+        <div class="bt-module">
+            <!--分类标题-->
+            <div  id="TypeName">
+                <div class="module-tit" th:fragment="TypeName">
+                    <h2><a href="" target="_blank" >[[${typeName}]]</a></h2>
+                    <p th:text="${typeName}" id="TypeNameCh" style="display: none"></p>
+                    <p>
+                        <span>—————</span>
+                        [[${typeNameE}]]
+                        <span>—————</span>
+                    </p>
+
+                </div>
+            </div>
+
+            <!--素材列表-->
+            <div class="bt-list" id="MoreBooks">
+                <ul class="clearfix" th:each="b:${books}" th:fragment="MoreBooks" >
+                    <li class="sc-home-ad">
+                        <a href="" th:href="@{/getMsgs(id=${b.id})}" class="jump-details jump-details-seo">
+                            <div class="blank ">
+                                <img class="bg-img" src="image/bg.jpg"th:src="@{/asserts/img/bg.jpg}" alt="">
+                                <img class="book-img" src="" th:src="@{${b.coverUrl}}" alt="">
+                            </div>
+                            <p><span>· 书 名:</span>[[${b.book_name}]]</p>
+                            <p><span>· 作 者:</span> &nbsp;[[${b.author}]]</p>
+                        </a>
+                    </li>
+                    <li style="display: none">
+
+                    </li>
+                </ul>
+
+            </div>
+            <!--分页样式-->
+            <div id="PageNumber">
+                <div th:fragment="PageNumber">
+                    <!--一共的页数-->
+                    <p th:text="${pageCount}" style="display:none" id="pageCount"></p>
+                    <p th:text="${NowPage}" style="display: none" id="NowPage"></p>
+                    <!--是第一页，首页和第一页不显示-->
+                   <span class="PageNumber" th:if="${NowPage!=1}" id="Page1">首页</span>
+                    <span class="PageNumber" th:if="${NowPage!=1}" id="Page2">上一页</span>
+
+
+                    <span style="width: 86px">第[[${NowPage}]]页/共[[${pageCount}]]页</span>
+                    <!--当前页是最后一页，下一页和尾页不显示-->
+                   <span class="PageNumber" th:if="${NowPage!=pageCount}" id="Page3">下一页</span>
+                    <span class="PageNumber" th:if="${NowPage!=pageCount}" id="Page4"> 尾页</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
