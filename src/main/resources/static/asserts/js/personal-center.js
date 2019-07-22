@@ -1,5 +1,5 @@
 jQuery(function(){
-    var reg4 =jQuery(".modify-btn");
+    var reg4 =jQuery(".modify-btn");@localhost
 
     //实现花瓣飘落特效
     jQuery(document).snowfall('clear');
